@@ -1,6 +1,8 @@
 <template>
-    <div class="items-center flex justify-center bg-white p-10 rounded">
+    <div class="items-center flex-col flex justify-center relative bg-white px-10 py-5 rounded">
+        <SliderNav v-if="nav && items.length > 1"/>
         <slot></slot>
+        <SliderDots v-if="nav && items.length > 1" :items-count="items.length"/>
     </div>
 </template>
 

@@ -1,8 +1,13 @@
+import SliderNav from './SliderNav/SliderNav.vue'
+import SliderDots from './SliderDots/SliderDots.vue'
+
 export default {
     name: 'Slider',
     props: {
         autoplay: {default: false, type: Boolean},
-        autoplayDelay: {default: 5000, type: Number}
+        autoplayDelay: {default: 5000, type: Number},
+        nav: {default: true, type: Boolean},
+        dots: {default: true, type: Boolean}
     },
     data() {
         return {
@@ -12,6 +17,7 @@ export default {
             autoplayInterval: null
         }
     },
+    components: {SliderNav,SliderDots},
     methods: {
         addItem(item) {
             this.items.push(item)
@@ -27,6 +33,9 @@ export default {
                 case 'next':
                     this.activeItem = this.items[this.activeItem + 1] ? this.activeItem + 1 : 0
                     break;
+                case 'prev':
+                    this.activeItem = this.items[this.activeItem - 1] ? this.activeItem - 1 : this.items.length - 1
+                    break;
             }
             this.handleTransition();
         },
@@ -40,6 +49,7 @@ export default {
     },
     created() {
         this.$on('add-item', this.addItem)
+        this.$on('navigate', this.navigate)
         //Initialize slider autoplay if prop set true
         if (this.autoplay) {
             this.initializeAutoplay()

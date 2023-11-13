@@ -1,8 +1,8 @@
 <template>
     <div id="app" class="w-full flex flex-col">
         <Header/>
-        <div class="flex flex-col md:flex-row justify-around h-full items-center md:items-start">
-            <Slider class="w-full md:w-5/12 overflow-hidden mt-10 md:h-auto h-full" :autoplay="false" :autoplay-delay="4000">
+        <div class="flex flex-col md:flex-row justify-start md:justify-around items-center md:items-start">
+            <Slider class="w-full md:w-5/12 mt-10 h-80 md:h-4/5" :autoplay="true" :autoplay-delay="4000">
                 <SliderVideo class="w-10/12" src="/videos/video.mp4" key="video-1"/>
                 <SliderImage src="/images/product-image.jpeg" key="image-1"/>
                 <SliderImage src="/images/product-image-back.jpeg" key="image-2"/>
