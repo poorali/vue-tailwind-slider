@@ -1,11 +1,9 @@
 <template>
-    <div>
-        This is our main slider
+    <div class="items-center flex justify-center bg-white">
+        <slot></slot>
     </div>
 </template>
 
 <script>
-export default {
-    name: 'Slider'
-}
+export {default} from "./hooks"
 </script>
