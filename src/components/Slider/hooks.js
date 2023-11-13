@@ -25,7 +25,7 @@ export default {
         //Create Interval for autoplay and run navigate every a few seconds
         initializeAutoplay() {
             if (this.autoplay) {
-                clearInterval(this.autoplayInterval)
+                this.pauseNavigation();
                 this.autoplayInterval = window.setInterval(this.navigate, this.autoplayDelay)
             }
         },
@@ -39,8 +39,11 @@ export default {
                     this.activeItem = this.items[this.activeItem - 1] ? this.activeItem - 1 : this.items.length - 1
                     break;
             }
-            this.initializeAutoplay();
             this.handleTransition();
+        },
+        //Pause Navigation
+        pauseNavigation(){
+            clearInterval(this.autoplayInterval)
         },
         //Handle Transition
         handleTransition() {
