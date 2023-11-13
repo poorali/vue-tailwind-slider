@@ -17,15 +17,17 @@ export default {
             autoplayInterval: null
         }
     },
-    components: {SliderNav,SliderDots},
+    components: {SliderNav, SliderDots},
     methods: {
         addItem(item) {
             this.items.push(item)
         },
         //Create Interval for autoplay and run navigate every a few seconds
         initializeAutoplay() {
-            clearInterval(this.autoplayInterval)
-            this.autoplayInterval = window.setInterval(this.navigate, this.autoplayDelay)
+            if (this.autoplay) {
+                clearInterval(this.autoplayInterval)
+                this.autoplayInterval = window.setInterval(this.navigate, this.autoplayDelay)
+            }
         },
         //Main Navigate function
         navigate(to = 'next') {
@@ -37,6 +39,7 @@ export default {
                     this.activeItem = this.items[this.activeItem - 1] ? this.activeItem - 1 : this.items.length - 1
                     break;
             }
+            this.initializeAutoplay();
             this.handleTransition();
         },
         //Handle Transition
@@ -51,8 +54,6 @@ export default {
         this.$on('add-item', this.addItem)
         this.$on('navigate', this.navigate)
         //Initialize slider autoplay if prop set true
-        if (this.autoplay) {
-            this.initializeAutoplay()
-        }
+        this.initializeAutoplay()
     }
 }
