@@ -17,7 +17,9 @@ export default {
             activeItem: 0,
             items: [],
             hasActiveAnimation: null,
-            autoplayInterval: null
+            autoplayInterval: null,
+            startDragX: null,
+            currentDragX: null
         }
     },
     components: {SliderNav, SliderDots, SliderThumbnails},
@@ -59,6 +61,29 @@ export default {
             window.setTimeout(function () {
                 this.hasActiveAnimation = false;
             }.bind(this), 1)
+        },
+        dragStart(e) {
+            //Enable dragging only for mobile devices
+            if(window.innerWidth < 600){
+                this.startDragX = e.touches[0].clientX;
+            }
+        },
+        dragging(e) {
+            if (e.touches[0].clientX !== 0 && this.startDragX !== null) {
+                this.currentDragX = e.touches[0].clientX;
+            }
+        },
+        dragEnd() {
+            if (this.currentDragX !== null) {
+                if (this.currentDragX > this.startDragX) {
+                    this.navigate('next')
+                }
+                if (this.currentDragX < this.startDragX) {
+                    this.navigate('prev')
+                }
+            }
+            this.startDragX = null;
+            this.currentDragX = null;
         }
     },
     created() {

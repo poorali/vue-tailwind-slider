@@ -1,5 +1,8 @@
 <template>
-    <div class="items-center flex justify-between relative bg-white px-10 py-5 rounded"
+    <div class="items-center flex justify-between relative bg-white px-10 py-5 rounded select-disable"
+         @touchstart="dragStart($event)"
+         @touchmove="dragging($event)"
+         @touchend="dragEnd"
          v-bind:class="thumbnailsOrientation === 'horizontal' ? 'flex-col': 'flex-row-reverse justify-center'"
          @mouseleave="initializeAutoplay" @mouseenter="pauseNavigation">
         <SliderNav v-if="nav && items.length > 1"/>
