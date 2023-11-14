@@ -39,8 +39,8 @@ export {default} from "./Hooks"
 }
 
 .zoom-container {
-    width: 400px;
-    height: 400px;
+    width: 420px;
+    height: 420px;
     left: 120%;
     top: -50%;
     overflow: hidden;
