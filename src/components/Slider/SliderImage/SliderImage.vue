@@ -1,14 +1,25 @@
 <template>
-    <div class="h-64 md:h-70 lg:h-86 hidden cursor-pointer"
+    <div class="h-64 md:h-70 lg:h-86 hidden relative"
          ref="sliderItem"
+         @mouseover="zoomStarted($event)"
+         @mousemove="zooming($event)"
+         @mouseout="zoomEnded"
          v-bind:class="{'show':$parent.activeItem === this.id && !$parent.hasActiveAnimation}">
-        <img class="h-full w-full object-cover select-disable" :src="this.src" :alt="this.alt"/>
+        <img ref="sliderImage"
+             class="h-full w-full object-cover select-disable" :src="this.src" :alt="this.alt"/>
+        <div ref="zoomBox" class="bg-transparent cursor-zoom border-2 border-red-500 w-20 h-20 absolute"
+             v-bind:class="{'hidden': !isZooming}">
+
+        </div>
+        <div v-if="isZooming" class="absolute border-red-500 rounded border-4 bg-red-50 zoom-container">
+            <img class="select-disable" ref="zoomImage" :src="largeImage || src"/>
+        </div>
     </div>
 </template>
 <script>
 export {default} from "./Hooks"
 </script>
-<style>
+<style scoped>
 @keyframes fadeIn {
     0% {
         opacity: 0;
@@ -18,8 +29,24 @@ export {default} from "./Hooks"
     }
 }
 
+.cursor-zoom {
+    cursor: crosshair;
+}
+
 .show {
     display: flex !important;
     animation: fadeIn 1s ease-out forwards;
+}
+
+.zoom-container {
+    width: 400px;
+    height: 400px;
+    left: 120%;
+    top: -50%;
+    overflow: hidden;
+}
+
+img{
+    max-width: unset !important;
 }
 </style>

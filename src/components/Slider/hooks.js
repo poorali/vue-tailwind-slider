@@ -10,7 +10,8 @@ export default {
         nav: {default: true, type: Boolean},
         dots: {default: true, type: Boolean},
         thumbnails: {default: true, type: Boolean},
-        thumbnailsOrientation: {default: 'horizontal', type: String}
+        zoom: {default: true, type: Boolean},
+        thumbnailsOrientation: {default: 'horizontal', type: String},
     },
     data() {
         return {
@@ -64,7 +65,7 @@ export default {
         },
         dragStart(e) {
             //Enable dragging only for mobile devices
-            if(window.innerWidth < 600){
+            if(window.innerWidth < 768){
                 this.startDragX = e.touches[0].clientX;
             }
         },
