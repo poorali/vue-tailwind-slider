@@ -1,5 +1,5 @@
 <template>
-        <div class="h-64 md:h-80 lg:h-96 hidden"
+        <div class="h-64 md:h-70 lg:h-86 hidden"
              ref="sliderItem"
              v-bind:class="{'show':$parent.activeItem === this.id && !$parent.hasActiveAnimation}">
             <img class="h-full w-full object-cover" :src="this.src" :alt="this.alt"/>

@@ -1,5 +1,6 @@
 import SliderNav from './SliderNav/SliderNav.vue'
 import SliderDots from './SliderDots/SliderDots.vue'
+import SliderThumbnails from './SliderThumbnails/SliderThumbnails.vue'
 
 export default {
     name: 'Slider',
@@ -7,7 +8,9 @@ export default {
         autoplay: {default: false, type: Boolean},
         autoplayDelay: {default: 5000, type: Number},
         nav: {default: true, type: Boolean},
-        dots: {default: true, type: Boolean}
+        dots: {default: true, type: Boolean},
+        thumbnails: {default: true, type: Boolean},
+        thumbnailsOrientation: {default: 'horizontal', type: String}
     },
     data() {
         return {
@@ -17,7 +20,7 @@ export default {
             autoplayInterval: null
         }
     },
-    components: {SliderNav, SliderDots},
+    components: {SliderNav, SliderDots, SliderThumbnails},
     methods: {
         addItem(item) {
             this.items.push(item)
@@ -39,10 +42,15 @@ export default {
                     this.activeItem = this.items[this.activeItem - 1] ? this.activeItem - 1 : this.items.length - 1
                     break;
             }
+            if (typeof to === 'object') {
+                if (to.id !== undefined) {
+                    this.activeItem = to.id;
+                }
+            }
             this.handleTransition();
         },
         //Pause Navigation
-        pauseNavigation(){
+        pauseNavigation() {
             clearInterval(this.autoplayInterval)
         },
         //Handle Transition

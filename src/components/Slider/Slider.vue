@@ -1,8 +1,12 @@
 <template>
-    <div class="items-center flex-col flex justify-center relative bg-white px-10 py-5 rounded" @mouseleave="initializeAutoplay" @mouseenter="pauseNavigation">
+    <div class="items-center flex justify-between relative bg-white px-10 py-5 rounded"
+         v-bind:class="thumbnailsOrientation === 'horizontal' ? 'flex-col': 'flex-row-reverse justify-center'"
+         @mouseleave="initializeAutoplay" @mouseenter="pauseNavigation">
         <SliderNav v-if="nav && items.length > 1"/>
         <slot></slot>
-        <SliderDots v-if="nav && items.length > 1" :items-count="items.length"/>
+        <slider-thumbnails v-if="thumbnails && items.length > 0 " :items="items" :orientation="thumbnailsOrientation"/>
+
+        <SliderDots v-if="dots && items.length > 1" :items-count="items.length"/>
     </div>
 </template>
 
