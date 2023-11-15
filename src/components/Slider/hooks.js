@@ -54,7 +54,8 @@ export default {
                 }
             }
             if (this.items[this.activeItem].isHidden) {
-                this.navigate('next');
+                const filteredItems = this.items.filter(item => !item.isHidden);
+                return this.navigate(filteredItems[0].id !== this.items[this.activeItem].id && to === 'prev' ? {id: filteredItems[filteredItems.length-1].id}: 'next');
             }
             this.handleTransition();
         },
@@ -83,10 +84,10 @@ export default {
         dragEnd() {
             if (this.currentDragX !== null) {
                 if (this.currentDragX > this.startDragX) {
-                    this.navigate('next')
+                    this.navigate('prev')
                 }
                 if (this.currentDragX < this.startDragX) {
-                    this.navigate('prev')
+                    this.navigate('next')
                 }
             }
             this.startDragX = null;
