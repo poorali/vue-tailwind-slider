@@ -7,6 +7,7 @@
                 <SliderImage src="/images/product-image.jpeg" thumbnail="/images/product-image-thumbnail.jpeg" large-image="/images/product-image-large.jpeg" key="image-1"/>
                 <SliderImage src="/images/product-image-back.jpeg" thumbnail="/images/product-image-back-thumbnail.jpeg" large-image="/images/product-image-back-large.jpeg" key="image-2"/>
                 <SliderImage src="/images/product-image-front.jpeg" thumbnail="/images/product-image-front-thumbnail.jpeg" large-image="/images/product-image-front-large.jpeg" key="image-3"/>
+                <SliderVideo class="w-10/12" src="/videos/video.mp4" key="video-2"/>
             </Slider>
             <Product/>
         </div>

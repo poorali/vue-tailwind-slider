@@ -4,7 +4,8 @@ export default {
         src: {required: true, type: String},
         thumbnail: String,
         customId: {default: null, type: Number},
-        activeItem: Number
+        activeItem: {default: null, type: Number},
+        play: {default: false, type: Boolean}
     },
     data() {
         return {
@@ -20,5 +21,22 @@ export default {
     },
     async mounted() {
         await this.addItem();
+    },
+    watch: {
+        activeItemStatus(value) {
+            if (this.play) {
+                if (!value) {
+                    this.$refs.video.pause();
+                    this.$refs.video.currentTime = 0;
+                } else {
+                    this.$refs.video.play();
+                }
+            }
+        }
+    },
+    computed: {
+        activeItemStatus() {
+            return (this.activeItem !== null ? (this.activeItem === this.id) : (this.$parent.activeItem === this.id))
+        }
     }
 }

@@ -41,7 +41,7 @@ export default {
         }
     },
     mounted() {
-        if (this.activeTab === 'image' && this.items.find(item => item.id === this.activeItem).type === 'video') {
+        if (this.items.find(item => item.id === this.activeItem).type === 'video') {
             this.activeTab = 'video';
         }
     },
