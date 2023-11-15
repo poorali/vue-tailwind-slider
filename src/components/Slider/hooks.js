@@ -39,6 +39,7 @@ export default {
         },
         //Main Navigate function
         navigate(to = 'next') {
+
             switch (to) {
                 case 'next':
                     this.activeItem = this.items[this.activeItem + 1] ? this.activeItem + 1 : 0
@@ -51,6 +52,9 @@ export default {
                 if (to.id !== undefined) {
                     this.activeItem = to.id;
                 }
+            }
+            if (this.items[this.activeItem].isHidden) {
+                this.navigate('next');
             }
             this.handleTransition();
         },
@@ -93,7 +97,21 @@ export default {
             if (this.popup) {
                 this.showPopup = !this.showPopup;
             }
+        },
+        hideVideos() {
+            this.items = this.items.map(item => {
+                if (item.type === 'video') {
+                    item.isHidden = window.innerWidth < 768;
+                }
+                return item;
+            })
+            if (this.items[this.activeItem].isHidden) {
+                this.navigate('next')
+            }
         }
+    },
+    mounted() {
+        this.hideVideos();
     },
     created() {
         this.$on('add-item', this.addItem)
@@ -101,5 +119,6 @@ export default {
         this.$on('toggle-popup', this.togglePopup)
         //Initialize slider autoplay if prop set true
         this.initializeAutoplay()
+        window.addEventListener('resize', this.hideVideos)
     }
 }

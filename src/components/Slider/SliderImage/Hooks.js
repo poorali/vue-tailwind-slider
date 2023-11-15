@@ -21,7 +21,7 @@ export default {
     methods: {
         async addItem() {
             this.id = this.customId !== null ? this.customId : this.$parent.items.length
-            const item = {...this.$props, ...{id: this.id, type: 'image'}}
+            const item = {...this.$props, ...{id: this.id, type: 'image', isHidden: false}}
             this.$parent.$emit('add-item', item)
         },
         zoomStarted() {
