@@ -3,6 +3,8 @@ export default {
     props: {
         src: {required: true, type: String},
         thumbnail: String,
+        customId: {default: null, type: Number},
+        activeItem: Number
     },
     data() {
         return {
@@ -11,7 +13,7 @@ export default {
     },
     methods: {
         async addItem() {
-            this.id = this.$parent.items.length
+            this.id = this.customId !== null ? this.customId : this.$parent.items.length
             const item = {...this.$props, ...{id: this.id, type: 'video'}}
             this.$parent.$emit('add-item', item)
         }

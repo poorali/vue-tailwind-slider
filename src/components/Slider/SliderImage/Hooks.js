@@ -5,18 +5,20 @@ export default {
         thumbnail: String,
         largeImage: String,
         alt: String,
+        customId: {default: null, type: Number},
+        activeItem: Number
     },
     data() {
         return {
-            id: 0,
             isZooming: false,
             zoomX: null,
-            zoomY: null
+            zoomY: null,
+            id: 0
         }
     },
     methods: {
         async addItem() {
-            this.id = this.$parent.items.length
+            this.id = this.customId !== null ? this.customId : this.$parent.items.length
             const item = {...this.$props, ...{id: this.id, type: 'image'}}
             this.$parent.$emit('add-item', item)
         },
@@ -41,8 +43,10 @@ export default {
                     this.zoomEnded()
                 }
                 //Show proper image in zoom container box based on hovered area
-                this.$refs.zoomImage.style.marginLeft = `-${this.zoomX * 1.5}%`
-                this.$refs.zoomImage.style.marginTop = `-${this.zoomY * 1.5}%`
+                if (this.$refs.zoomImage) {
+                    this.$refs.zoomImage.style.marginLeft = `-${this.zoomX * 1.5}%`
+                    this.$refs.zoomImage.style.marginTop = `-${this.zoomY * 1.5}%`
+                }
             }
 
         },

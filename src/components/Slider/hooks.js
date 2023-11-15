@@ -1,6 +1,7 @@
 import SliderNav from './SliderNav/SliderNav.vue'
 import SliderDots from './SliderDots/SliderDots.vue'
 import SliderThumbnails from './SliderThumbnails/SliderThumbnails.vue'
+import SliderPopup from './SliderPopup/SliderPopup.vue'
 
 export default {
     name: 'Slider',
@@ -11,6 +12,7 @@ export default {
         dots: {default: true, type: Boolean},
         thumbnails: {default: true, type: Boolean},
         zoom: {default: true, type: Boolean},
+        popup: {default: true, type: Boolean},
         thumbnailsOrientation: {default: 'horizontal', type: String},
     },
     data() {
@@ -20,10 +22,11 @@ export default {
             hasActiveAnimation: null,
             autoplayInterval: null,
             startDragX: null,
-            currentDragX: null
+            currentDragX: null,
+            showPopup: false,
         }
     },
-    components: {SliderNav, SliderDots, SliderThumbnails},
+    components: {SliderNav, SliderDots, SliderThumbnails, SliderPopup},
     methods: {
         addItem(item) {
             this.items.push(item)
@@ -65,7 +68,7 @@ export default {
         },
         dragStart(e) {
             //Enable dragging only for mobile devices
-            if(window.innerWidth < 768){
+            if (window.innerWidth < 768) {
                 this.startDragX = e.touches[0].clientX;
             }
         },
@@ -85,11 +88,18 @@ export default {
             }
             this.startDragX = null;
             this.currentDragX = null;
+        },
+        //TogglePopup
+        togglePopup() {
+            if (this.popup) {
+                this.showPopup = !this.showPopup;
+            }
         }
     },
     created() {
         this.$on('add-item', this.addItem)
         this.$on('navigate', this.navigate)
+        this.$on('toggle-popup', this.togglePopup)
         //Initialize slider autoplay if prop set true
         this.initializeAutoplay()
     }

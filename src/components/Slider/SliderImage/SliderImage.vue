@@ -4,7 +4,8 @@
          @mouseover="zoomStarted($event)"
          @mousemove="zooming($event)"
          @mouseout="zoomEnded"
-         v-bind:class="{'show':$parent.activeItem === this.id && !$parent.hasActiveAnimation}">
+         @click="$parent.$emit('toggle-popup')"
+         v-bind:class="{'show':( activeItem === this.id || $parent.activeItem === this.id) && !$parent.hasActiveAnimation}">
         <img ref="sliderImage"
              class="h-full w-full object-cover select-disable" :src="this.src" :alt="this.alt"/>
         <div ref="zoomBox" class="bg-transparent cursor-zoom border-2 border-red-500 w-20 h-20 absolute"
