@@ -11,7 +11,6 @@ export default {
         nav: {default: true, type: Boolean},
         dots: {default: true, type: Boolean},
         thumbnails: {default: true, type: Boolean},
-        zoom: {default: true, type: Boolean},
         popup: {default: true, type: Boolean},
         thumbnailsOrientation: {default: 'horizontal', type: String},
     },

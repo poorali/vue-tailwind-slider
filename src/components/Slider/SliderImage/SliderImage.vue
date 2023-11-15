@@ -1,14 +1,17 @@
 <template>
-    <div class="h-64 md:h-70 lg:h-86 hidden relative"
+    <div class="h-64 md:h-70 lg:h-86 hidden relative transition-transform"
          ref="sliderItem"
          @mouseover="zoomStarted($event)"
          @mousemove="zooming($event)"
          @mouseout="zoomEnded"
          @click="$parent.$emit('toggle-popup')"
-         v-bind:class="{'show':( activeItem === this.id || $parent.activeItem === this.id) && !$parent.hasActiveAnimation}">
+         v-bind:class="{'show':activeItemStatus && !$parent.hasActiveAnimation}">
         <img ref="sliderImage"
-             class="h-full w-full object-cover select-disable" :src="this.src" :alt="this.alt"/>
-        <div ref="zoomBox" class="bg-transparent cursor-zoom border-2 border-red-500 w-20 h-20 absolute"
+             @click="tap($event)"
+             @mousemove="tapping($event)"
+             v-bind:class="isTapping ? 'cursor-zoom-out' :'cursor-zoom-in'"
+             class="h-full w-full object-contain select-disable" :src="this.src" :alt="this.alt"/>
+        <div ref="zoomBox" class="bg-transparent cursor-crosshair border-2 border-red-500 w-20 h-20 absolute"
              v-bind:class="{'hidden': !isZooming}">
 
         </div>
@@ -30,8 +33,16 @@ export {default} from "./Hooks"
     }
 }
 
-.cursor-zoom {
+.cursor-crosshair {
     cursor: crosshair;
+}
+
+.cursor-zoom-in {
+    cursor: zoom-in;
+}
+
+.cursor-zoom-out {
+    cursor: zoom-out;
 }
 
 .show {
@@ -47,7 +58,7 @@ export {default} from "./Hooks"
     overflow: hidden;
 }
 
-img{
+img {
     max-width: unset !important;
 }
 </style>
