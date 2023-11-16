@@ -1,3 +1,5 @@
+import {isMobile} from "@/utils";
+
 export default {
     name: 'SliderImage',
     props: {
@@ -15,6 +17,7 @@ export default {
             isTapping: false,
             zoomX: null,
             zoomY: null,
+            tapCount: 0,
             id: 0
         }
     },
@@ -25,12 +28,12 @@ export default {
             this.$parent.$emit('add-item', item)
         },
         zoomStarted() {
-            if (window.innerWidth > 768 && this.zoom === 'hover') {
+            if (!isMobile() && this.zoom === 'hover') {
                 this.isZooming = true
             }
         },
         zooming(e) {
-            if (window.innerWidth > 768 && this.zoom === 'hover') {
+            if (!isMobile() && this.zoom === 'hover') {
                 this.isZooming = true
                 //Get SliderItem position
                 const zoomBox = this.$refs.zoomBox.getBoundingClientRect();
@@ -72,6 +75,16 @@ export default {
         },
         //Tap Zoom
         tap(e) {
+            //Handle double tap in mobile
+            if (this.tapCount >= 0 && this.tapCount < 2) {
+                this.tapCount += 1;
+            }
+            window.setTimeout(function () {
+                this.tapCount = 0
+            }.bind(this), 450)
+            if (isMobile() && this.tapCount !== 2) {
+                return false;
+            }
             if (this.zoom === 'tap') {
                 //Tap Zoom functionality here
                 this.isTapping = !this.isTapping;
@@ -86,6 +99,9 @@ export default {
             }
         },
         tapping(e) {
+            if (isMobile() && this.tapCount !== 2) {
+                return false;
+            }
             if (this.zoom === 'tap' && this.isTapping) {
                 this.calcTapOrigin(e)
             }

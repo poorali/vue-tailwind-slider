@@ -1,6 +1,7 @@
 import SliderImage from "@/components/Slider/SliderImage/SliderImage.vue";
 import SliderThumbnails from "@/components/Slider/SliderThumbnails/Hooks";
 import SliderVideo from "@/components/Slider/SliderVideo/Hooks";
+import {isMobile} from "@/utils";
 
 export default {
     name: 'SliderPopup',
@@ -24,7 +25,7 @@ export default {
             this.navigate({id: this.activeTabItems[0].id})
         },
         handleTabResize() {
-            if (window.innerWidth < 768 && this.activeTab === 'video') {
+            if (isMobile() && this.activeTab === 'video') {
                 this.toggleTab('image')
             }
         }

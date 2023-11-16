@@ -2,6 +2,7 @@ import SliderNav from './SliderNav/SliderNav.vue'
 import SliderDots from './SliderDots/SliderDots.vue'
 import SliderThumbnails from './SliderThumbnails/SliderThumbnails.vue'
 import SliderPopup from './SliderPopup/SliderPopup.vue'
+import {isMobile} from "@/utils";
 
 export default {
     name: 'Slider',
@@ -76,7 +77,7 @@ export default {
         },
         dragStart(e) {
             //Enable dragging only for mobile devices
-            if (window.innerWidth < 768) {
+            if (isMobile()) {
                 this.startDragX = e.touches[0].clientX;
             }
         },
@@ -106,7 +107,7 @@ export default {
         hideVideos() {
             this.items = this.items.map(item => {
                 if (item.type === 'video') {
-                    item.isHidden = window.innerWidth < 768;
+                    item.isHidden = isMobile();
                 }
                 return item;
             })

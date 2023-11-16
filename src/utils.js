@@ -14,7 +14,11 @@ export function onClassChange(node, callback) {
         }
     });
 
-    mutationObserver.observe(node, { attributes: true });
+    mutationObserver.observe(node, {attributes: true});
 
     return mutationObserver;
+}
+
+export function isMobile() {
+    return window.innerWidth < 768
 }

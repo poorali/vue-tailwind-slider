@@ -14,18 +14,19 @@ export default {
         //Scroll to active thumbnail
         activeItem(value) {
             let activeThumbnail = this.$refs['thumbnails-' + value];
+            if (!activeThumbnail) {
+                return false
+            }
             if (activeThumbnail.constructor === Array) {
                 activeThumbnail = activeThumbnail[0];
             }
-            if (activeThumbnail) {
-                let offset = null;
-                if (this.orientation === 'vertical') {
-                    offset = {top: activeThumbnail.offsetTop - (activeThumbnail.getBoundingClientRect().height * 3)}
-                } else {
-                    offset = {left: activeThumbnail.offsetLeft - (activeThumbnail.getBoundingClientRect().width * 3)}
-                }
-                this.$refs.thumbnailContainer.scrollTo({...{behavior: 'smooth'}, ...offset});
+            let offset = null;
+            if (this.orientation === 'vertical') {
+                offset = {top: activeThumbnail.offsetTop - (activeThumbnail.getBoundingClientRect().height * 3)}
+            } else {
+                offset = {left: activeThumbnail.offsetLeft - (activeThumbnail.getBoundingClientRect().width * 3)}
             }
+            this.$refs.thumbnailContainer.scrollTo({...{behavior: 'smooth'}, ...offset});
         }
     }
 }
