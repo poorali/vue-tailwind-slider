@@ -7,14 +7,14 @@ import {isMobile} from "@/utils";
 export default {
     name: 'Slider',
     props: {
-        title: {default: '', type: String},
-        features: {default: '', type: String},
         autoplay: {default: false, type: Boolean},
         autoplayDelay: {default: 5000, type: Number},
-        nav: {default: true, type: Boolean},
         dots: {default: true, type: Boolean},
-        thumbnails: {default: true, type: Boolean},
+        features: {default: '', type: String},
+        nav: {default: true, type: Boolean},
         popup: {default: true, type: Boolean},
+        title: {default: '', type: String},
+        thumbnails: {default: true, type: Boolean},
         thumbnailsOrientation: {default: 'horizontal', type: String},
     },
     data() {

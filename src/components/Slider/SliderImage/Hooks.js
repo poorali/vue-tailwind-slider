@@ -3,14 +3,14 @@ import {isMobile} from "@/utils";
 export default {
     name: 'SliderImage',
     props: {
-        src: {required: true, type: String},
-        customId: {default: null, type: Number},
-        zoom: {default: 'hover', type: String},//Zoom type accepts hover,tap and disabled
-        thumbnail: String,
-        largeImage: String,
         alt: String,
         activeItem: {default: null, type: Number},
-        tag: {default: null, type: String}
+        customId: {default: null, type: Number},
+        largeImage: String,
+        src: {required: true, type: String},
+        thumbnail: String,
+        tag: {default: null, type: String},
+        zoom: {default: 'hover', type: String}//Zoom type accepts hover,tap and disabled
     },
     data() {
         return {

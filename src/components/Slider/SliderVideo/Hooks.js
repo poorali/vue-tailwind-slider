@@ -1,11 +1,11 @@
 export default {
     name: 'SliderVideo',
     props: {
+        activeItem: {default: null, type: Number},
+        customId: {default: null, type: Number},
+        play: {default: false, type: Boolean},
         src: {required: true, type: String},
         thumbnail: String,
-        customId: {default: null, type: Number},
-        activeItem: {default: null, type: Number},
-        play: {default: false, type: Boolean}
     },
     data() {
         return {
