@@ -57,6 +57,13 @@ export default {
                 if (to.id !== undefined) {
                     this.activeItem = to.id;
                 }
+                //Navigate to specific tag,color,size, etc...
+                if (to.tag !== undefined) {
+                    const taggedItems = this.items.filter(item => item.tag === to.tag);
+                    if(taggedItems){
+                        this.activeItem = taggedItems[0].id
+                    }
+                }
             }
             if (this.items[this.activeItem].isHidden) {
                 const filteredItems = this.items.filter(item => !item.isHidden);

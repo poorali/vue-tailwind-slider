@@ -9,7 +9,8 @@ export default {
         thumbnail: String,
         largeImage: String,
         alt: String,
-        activeItem: {default: null, type: Number}
+        activeItem: {default: null, type: Number},
+        tag: {default: null, type: String}
     },
     data() {
         return {
