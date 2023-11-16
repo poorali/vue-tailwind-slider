@@ -24,15 +24,20 @@
                     </button>
                     <div class="border-b-2 border-gray-300 w-full"></div>
                 </div>
-                <div class="flex flex-col md:flex-row h-full mt-10">
-                    <Slider class="w-full overflow-hidden md:w-4/6 h-96 md:h-4/5"  :popup="false" :nav="false" :zoom="false"  :dots="false" :thumbnails="false">
+                <div class="flex flex-col md:flex-row h-full justify-evenly m-0 md:mt-10">
+                    <div class="block md:hidden">
+                        <slot></slot>
+                    </div>
+                    <Slider class="w-full overflow-hidden md:w-4/6 h-72 md:h-4/5 " :autoplay="false" :popup="false" :nav="false" :zoom="false"  :dots="false" :thumbnails="false">
                         <template v-for="(item) in activeTabItems">
                             <SliderImage class="h-72 md:h-96 m-auto" zoom="tap" :src="item.src" :active-item="activeItem" :custom-id="item.id" :key="item.id" v-if="item.type === 'image'"/>
                             <SliderVideo :play="true" class="h-full m-auto" :src="item.src" :active-item="activeItem" :custom-id="item.id" :key="item.id" v-if="item.type === 'video'"/>
                         </template>
                     </Slider>
                     <div class="flex flex-col w-full md:w-2/6">
-                        <slot></slot>
+                        <div class="hidden md:block">
+                            <slot></slot>
+                        </div>
                         <slider-thumbnails class="flex-wrap justify-content-begin" :active-item="activeItem" :items="activeTabItems" key="inline-slider-thumbnails"/>
                     </div>
                 </div>

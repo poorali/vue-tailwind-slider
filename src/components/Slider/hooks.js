@@ -36,7 +36,9 @@ export default {
         initializeAutoplay() {
             if (this.autoplay) {
                 this.pauseNavigation();
-                this.autoplayInterval = window.setInterval(this.navigate, this.autoplayDelay)
+                if (!this.showPopup) {
+                    this.autoplayInterval = window.setInterval(this.navigate, this.autoplayDelay)
+                }
             }
         },
         //Main Navigate function

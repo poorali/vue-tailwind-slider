@@ -17,14 +17,15 @@ export default {
             if (activeThumbnail.constructor === Array) {
                 activeThumbnail = activeThumbnail[0];
             }
-            let offset = null;
-            if (this.orientation === 'vertical') {
-                offset = {top: activeThumbnail.offsetTop - (activeThumbnail.getBoundingClientRect().height * 3)}
-            } else {
-                offset = {left: activeThumbnail.offsetLeft - (activeThumbnail.getBoundingClientRect().width * 3)}
+            if (activeThumbnail) {
+                let offset = null;
+                if (this.orientation === 'vertical') {
+                    offset = {top: activeThumbnail.offsetTop - (activeThumbnail.getBoundingClientRect().height * 3)}
+                } else {
+                    offset = {left: activeThumbnail.offsetLeft - (activeThumbnail.getBoundingClientRect().width * 3)}
+                }
+                this.$refs.thumbnailContainer.scrollTo({...{behavior: 'smooth'}, ...offset});
             }
-
-            this.$refs.thumbnailContainer.scrollTo({...{behavior: 'smooth'}, ...offset});
         }
     }
 }
