@@ -1,5 +1,5 @@
 <template>
-    <div class="h-64 md:h-70 lg:h-86  md:mr-auto hidden relative transition-transform"
+    <div class="h-64 md:h-70 lg:h-86 mx-auto hidden relative transition-transform"
          ref="sliderItem"
          @mouseover="zoomStarted($event)"
          @mousemove="zooming($event)"

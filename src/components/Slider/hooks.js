@@ -6,6 +6,8 @@ import SliderPopup from './SliderPopup/SliderPopup.vue'
 export default {
     name: 'Slider',
     props: {
+        title: {default: '', type: String},
+        features: {default: '', type: String},
         autoplay: {default: false, type: Boolean},
         autoplayDelay: {default: 5000, type: Number},
         nav: {default: true, type: Boolean},
@@ -55,7 +57,7 @@ export default {
             }
             if (this.items[this.activeItem].isHidden) {
                 const filteredItems = this.items.filter(item => !item.isHidden);
-                return this.navigate(filteredItems[0].id !== this.items[this.activeItem].id && to === 'prev' ? {id: filteredItems[filteredItems.length-1].id}: 'next');
+                return this.navigate(filteredItems[0].id !== this.items[this.activeItem].id && to === 'prev' ? {id: filteredItems[filteredItems.length - 1].id} : 'next');
             }
             this.handleTransition();
         },

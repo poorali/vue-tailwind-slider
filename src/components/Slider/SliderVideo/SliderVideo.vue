@@ -1,5 +1,5 @@
 <template>
-    <div  class="h-64 md:h-70 lg:h-86 hidden md:mr-auto relative flex-col items-center justify-center"
+    <div  class="h-64 md:h-70 lg:h-86 hidden mx-auto relative flex-col items-center justify-center"
          ref="sliderItem"
          v-bind:class="{'show':activeItemStatus && !$parent.hasActiveAnimation}">
         <video ref="video" :autoplay="play && activeItemStatus" :src="this.src" v-bind:controls="play"></video>

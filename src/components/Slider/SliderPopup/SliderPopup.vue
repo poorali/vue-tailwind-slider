@@ -31,7 +31,10 @@
                             <SliderVideo :play="true" class="h-full m-auto" :src="item.src" :active-item="activeItem" :custom-id="item.id" :key="item.id" v-if="item.type === 'video'"/>
                         </template>
                     </Slider>
-                    <slider-thumbnails  :active-item="activeItem" :items="activeTabItems" class="w-full md:w-1/6" key="inline-slider-thumbnails"/>
+                    <div class="flex flex-col w-full md:w-2/6">
+                        <slot></slot>
+                        <slider-thumbnails class="flex-wrap justify-content-begin" :active-item="activeItem" :items="activeTabItems" key="inline-slider-thumbnails"/>
+                    </div>
                 </div>
             </div>
         </div>
