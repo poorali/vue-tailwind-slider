@@ -39,7 +39,7 @@ export default {
                 //Get SliderItem position
                 const zoomBox = this.$refs.zoomBox.getBoundingClientRect();
                 const sliderImage = this.$refs.sliderImage.getBoundingClientRect();
-                // const sliderImage = this.$refs.sliderImage.getBoundingClientRect();
+                const zoomImage = this.$refs.zoomImage.getBoundingClientRect();
                 this.zoomX = (e.clientX - sliderImage.left) - (zoomBox.width / 2);
                 this.zoomY = (e.clientY - sliderImage.top) - (zoomBox.height / 2);
                 this.$refs.zoomBox.style.left = this.zoomX + 'px';
@@ -48,10 +48,11 @@ export default {
                     this.zoomEnded()
                 }
                 //Show proper image in zoom container box based on hovered area
-                if (this.$refs.zoomImage) {
-                    this.$refs.zoomImage.style.marginLeft = `-${this.zoomX * 1.5}%`
-                    this.$refs.zoomImage.style.marginTop = `-${this.zoomY * 1.5}%`
-                }
+                const cx = zoomImage.width / zoomBox.width;
+                const cy = zoomImage.height / zoomBox.height;
+                this.$refs.zoomImage.style.backgroundSize = (sliderImage.width * cx) + "px " + (sliderImage.height * cy) + "px";
+                this.$refs.zoomImage.style.backgroundPosition = "-" + (this.zoomX * cx) + "px -" + (this.zoomY * cy) + "px";
+
             }
 
         },

@@ -15,8 +15,7 @@
              v-bind:class="{'hidden': !isZooming}">
 
         </div>
-        <div v-if="isZooming" class="absolute border-red-500 rounded border-4 bg-red-50 zoom-container">
-            <img class="select-disable" ref="zoomImage" :src="largeImage || src"/>
+        <div v-if="isZooming" ref="zoomImage" :style="{backgroundImage: `url(${this.src})`}" class="absolute border-red-500 rounded border-4 bg-red-50 zoom-container">
         </div>
     </div>
 </template>
@@ -51,11 +50,12 @@ export {default} from "./Hooks"
 }
 
 .zoom-container {
-    width: 420px;
-    height: 420px;
+    width: 400px;
+    height: 400px;
     left: 120%;
     top: -50%;
     overflow: hidden;
+    background-repeat: no-repeat;
 }
 
 img {
